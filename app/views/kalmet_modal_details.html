@@ -1,0 +1,33 @@
+<div class="modal fade" id="modal-details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">
+          <span ng-show="detailsDialogLine.feet.length > 0">
+            <span class="foot" ng-repeat="foot in detailsDialogLine.feet"><span class="syll" ng-repeat="syll in foot.syllables">{{ syll.precedingText }}<span class="{{ syll.annotations.textStyle }}">{{ syll.text }}</span>{{ syll.followingPunctuation }}{{ syll.followingText }}</span></span>
+          </span>
+          <span ng-show="detailsDialogLine.feet.length === 0 && !detailsDialogLine.isEmpty()">
+            {{ detailsDialogLine.toString('-') }} &nbsp;
+          </span>
+          <span ng-show="detailsDialogLine.feet.length === 0 && detailsDialogLine.isEmpty()">
+            (tyhjä)
+          </span>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <span ng-show="!detailsDialogLine.isEmpty()">
+          <ul class="list-group">
+            <li ng-repeat="err in detailsDialogLine.summary.annotationsGrouped()" class="list-group-item alert {{ err.annotation.style }}">
+              <span class="glyphicon {{ err.annotation.iconStyle }}" aria-hidden="true"></span>
+              {{ err.annotation.text }} <span ng-show="{{ err.num > 1 }}">(×{{ err.num }})</span>
+            </li>
+          </ul>
+        </span>
+        <span ng-show="detailsDialogLine.isEmpty()">
+          <p>Sovellus tarkistaa runomitan, kun lisäät tälle riville tekstiä.</p>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

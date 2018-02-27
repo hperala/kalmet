@@ -1,0 +1,123 @@
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
+
+/****************/
+
+.info-dialog .modal-footer {
+  text-align: center;
+}
+
+.navbar li {
+  font-size: larger;
+  margin-top: .5em;
+  margin-bottom: .5em;
+}
+
+.list-group a {
+  font-size: larger;
+}
+
+#title-label {
+  max-width: 40vw;
+  overflow: hidden;
+  white-space: nowrap;
+  font-style: italic;
+}
+
+.text-ok {
+  
+}
+
+.text-warning {
+  background-image: url('../images/underline-warning.png');
+  background-repeat: repeat-x;
+  background-position: left bottom;
+  border-bottom: 1px solid transparent;
+}
+
+.text-error {
+  background-image: url('../images/underline-error.png');
+  background-repeat: repeat-x;
+  background-position: left bottom;
+  border-bottom: 1px solid transparent;
+}
+
+#editor-container {
+  padding-left: 4em;
+  font-size: 1.3em;
+}
+
+#editor-container .column {
+  position: relative;
+  float: left;
+}
+
+#input {
+  width: 100%;
+}
+
+#line-details-buttons {
+  width: 4em;
+  right: 4em;
+  margin-left: -100%;
+  padding-top: .7em;
+  padding-left: .3em;
+}
+
+.line-details-button {
+  text-align: right;
+  padding: .0em 5% 0em 5%;
+  height: 2.7em;
+  /* Content height + top/bottom margin should equal line height in the text area */
+}
+
+#input-area, #input-markup {
+  line-height: 2.7em;
+}
+
+#input-area {
+  /* 
+   * As a positioned element this will appear on top of an non-positioned element (#input-markup). 
+   * The textarea needs to be on top to allow the user to select it. 
+   */
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  padding: .1em;
+  width: 100%;
+  border: 0px;
+  overflow-y: hidden;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+#input-markup {
+  padding-left: .15em;
+  padding-top: .1em;
+  color: rgba(0, 0, 0, 0);
+}

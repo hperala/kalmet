@@ -1,0 +1,20 @@
+<div class="modal fade" id="modal-edit-title" tabindex="-1" role="dialog" aria-labelledby="modal-edit-title-title" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="modal-edit-title-title">
+          Muokkaa nimeä
+        </h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <input type="text" class="form-control" id="title-field" ng-model="analyzerService.document.header.title" ng-keypress="keyPressedEditingTitle($event)" autofocus>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="endEditingTitle()" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
