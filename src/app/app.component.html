@@ -1,0 +1,23 @@
+<app-menu 
+  (newDocumentClicked)="onCreateDocument()"
+  (openDocumentClicked)="onOpenDocumentDialogOpened()"
+  (deleteDocumentClicked)="onDeleteDocument()">
+</app-menu>
+<app-editor 
+  [document]="document" 
+  (textChanged)="onTextChanged($event)"
+  (detailsButtonClicked)="onDetailsButtonClicked($event)">
+</app-editor>
+<app-modal-details 
+  [line]="selectedLine">
+</app-modal-details>
+<app-modal-edit-title 
+  [document]="document"
+  (titleChanged)="onDocumentTitleChanged($event)">
+</app-modal-edit-title>
+<app-modal-open-doc 
+  [headers]="documentHeaders"
+  (documentChanged)="onSelectedDocumentChanged($event)">
+</app-modal-open-doc>
+<app-modal-help></app-modal-help>
+<app-modal-about></app-modal-about>

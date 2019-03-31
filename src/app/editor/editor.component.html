@@ -1,0 +1,38 @@
+<div id="editor-container">
+  <div id="input" class="column">
+    <div id="input-markup">
+      <span *ngFor="let line of presentationalLines; trackBy: trackByLines"><!--
+     --><span *ngFor="let word of line.words; let w = index"><!--
+       -->{{ word.precedingText }}<!--
+       --><span *ngFor="let syll of word.syllables; let s = index" 
+            class="{{ line.textStyleByWordAndSyllable(w, s) }}">{{ syll }}</span><!--
+     --></span><!--
+     -->{{ line.followingText }}<br><!--
+   --></span>
+    </div>
+    <textarea #inputArea
+      id="input-area" 
+      [(ngModel)]="document.text" 
+      (input)="onTextChanged()"
+      rows="{{ presentationalLines.length + 1 }}" 
+      placeholder="Kirjoita teksti (1 säe/rivi)" 
+      spellcheck="false">
+    </textarea>
+  </div>
+  <div id="line-details-buttons" class="column">
+    <div *ngFor="let line of presentationalLines; let i = index; trackBy: trackByLines" 
+      class="line-details-button">
+      <button 
+        type="button" 
+        class="btn {{ line.buttonStyle }}" 
+        [attr.disabled]="line.isEmpty() ? '' : null" 
+        data-toggle="modal" 
+        data-target="#modal-details" 
+        (click)="onDetailsButtonClicked(i)">
+        <span class="label">
+          <span class="fas {{ line.iconStyle }}" aria-hidden="true"></span>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>

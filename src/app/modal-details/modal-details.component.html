@@ -1,0 +1,67 @@
+<div *ngIf="line != null" class="modal fade" id="modal-details" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myModalLabel">
+          <span *ngIf="line.feet.length > 0">
+            <span class="foot" *ngFor="let foot of line.feet; let f = index"><!--
+           --><span class="syll" *ngFor="let syll of foot.syllables; let s = index"><!--
+             -->{{ syll.precedingText }}<!--
+             --><span class="{{ line.textStyleByFoot(f, s) }}">{{ syll.text }}</span><!--
+             --><span class="punctuation">{{ line.punctuation(syll.followingPunctuation) }}</span><!--
+             -->{{ syll.followingText }}<!--
+           --></span><!--
+         --></span>
+          </span>
+          <span *ngIf="line.feet.length === 0 && !line.isEmpty()">
+            {{ line.toString('-') }} &nbsp;
+          </span>
+          <span *ngIf="line.feet.length === 0 && line.isEmpty()">
+            (tyhjä)
+          </span>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="errorPanelVisible">
+        <div *ngIf="!line.isEmpty()">
+          <ul class="list-group">
+            <li 
+              *ngFor="let err of line.annotationsGrouped; let i = index" 
+              class="list-group-item {{ line.annotationGroupMessageStyle(i) }}">
+              <span class="fas {{ line.annotationGroupIconStyle(i) }}" aria-hidden="true"></span>
+              {{ line.annotationGroupText(i) }} <span *ngIf="err.count > 1">(×{{ err.count }})</span>
+              <br>
+              <button 
+                *ngIf="line.annotationGroupRuleHtml(i) !== null" 
+                (click)="onShowRule(line.annotationGroupRuleHtml(i))"
+                type="button" 
+                class="btn btn-primary">
+                {{ line.annotationGroupRuleName(i) }}
+              </button>
+            </li>
+          </ul>
+        </div>
+        <div *ngIf="line.ok()">
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-success">
+              <span class="fas fa-check" aria-hidden="true"></span> Ei virheitä!
+            </li>
+          </ul>
+        </div>
+        <span *ngIf="line.isEmpty()">
+          <p>Sovellus tarkistaa runomitan, kun lisäät tälle riville tekstiä.</p>
+        </span>
+      </div>
+      <div class="modal-body" 
+        *ngIf="!errorPanelVisible">
+        <div [innerHTML]="currentRuleHtml">
+        </div>
+        <button (click)="onHideRule()" type="button" class="btn btn-primary">
+          Takaisin
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
