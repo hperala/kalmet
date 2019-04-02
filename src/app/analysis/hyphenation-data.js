@@ -148,6 +148,22 @@ export class WordsAndSyllables {
     return this.words.reduce((sum, word) => sum + word.syllables.length, 0);
   }
 
+  syllableAt(index) {
+    if (index < 0 || index >= this.numSyllables()) {
+      throw new Error('Index out of range: ' + index);
+    }
+
+    let i = 0;
+    for (const word of this.words) {
+      for (const syllable of word.syllables) {
+        if (i === index) {
+          return syllable;
+        }
+        i++;
+      }
+    }
+  }
+
   toString(separator = '-') {
     let output = '';
     for (const word of this.words) {

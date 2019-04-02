@@ -1,7 +1,7 @@
 import { Language } from './language';
 import { hyphenationConstants, breakTypes } from './hyphenation-defs';
 import { CombinationGenerator, SyllableBreak, WordsAndPotentialBreaks, 
-         Syllabifications } from './hyphenation-data';
+         WordsAndSyllables, Syllabifications } from './hyphenation-data';
 import { Hyphenation } from './hyphenation';
 import { analysisConstants } from './analysis-defs';
 
@@ -67,9 +67,44 @@ describe('HyphenationData module', () => {
 
   });
   
+  describe('WordsAndSyllables class', () => {
+
+    describe('syllableAt method', () => {
+
+      it('should return the only syllable in the only word', () => {
+        const was = new WordsAndSyllables([{
+          precedingText: '',
+          syllables: ['On']
+        }],
+        '');
+
+        expect(was.syllableAt(0)).toBe('On');
+      });
+
+      it('should return any syllable in any word', () => {
+        const was = new WordsAndSyllables([{
+          precedingText: '',
+          syllables: ['Va', 'ka']
+        },
+        {
+          precedingText: '',
+          syllables: ['van', 'ha']
+        }],
+        '');
+
+        expect(was.syllableAt(0)).toBe('Va');
+        expect(was.syllableAt(1)).toBe('ka');
+        expect(was.syllableAt(2)).toBe('van');
+        expect(was.syllableAt(3)).toBe('ha');
+      });
+
+    });
+
+  });
+
   describe('Syllabifications class', () => {
 
-    it('should...', () => {
+    it('should give the default syllabification first', () => {
       const lang = new Language();
       const h = new Hyphenation(lang);
       const wapb = h.syllabify('Tavua, oi');
