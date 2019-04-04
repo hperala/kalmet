@@ -48,7 +48,7 @@ export class PresentationalLine {
   }
 
   ok() {
-    return this.result.getLineErrorLevel() === analysisConstants.ERROR_LEVEL_NONE;
+    return this.result.getLineErrorLevel() <= analysisConstants.ERROR_LEVEL_COMMENT;
   }
 
   punctuation(symbol) {
@@ -149,6 +149,7 @@ var html = {};
 
 const buttonStyle = {};
 buttonStyle[analysisConstants.ERROR_LEVEL_NONE] = 'btn-success';
+buttonStyle[analysisConstants.ERROR_LEVEL_COMMENT] = 'btn-success';
 buttonStyle[analysisConstants.ERROR_LEVEL_WARNING] = 'btn-warning';
 buttonStyle[analysisConstants.ERROR_LEVEL_ERROR] = 'btn-danger';
 buttonStyle[analysisConstants.ERROR_LEVEL_SHORT] = 'btn-outline-secondary';
@@ -156,6 +157,7 @@ const buttonStyleDefault = 'btn-outline-dark';
 
 const messageStyle = {};
 messageStyle[analysisConstants.ERROR_LEVEL_NONE] = 'list-group-item-success';
+messageStyle[analysisConstants.ERROR_LEVEL_COMMENT] = 'list-group-item-info';
 messageStyle[analysisConstants.ERROR_LEVEL_WARNING] = 'list-group-item-warning';
 messageStyle[analysisConstants.ERROR_LEVEL_ERROR] = 'list-group-item-danger';
 messageStyle[analysisConstants.ERROR_LEVEL_SHORT] = 'list-group-item-danger';
@@ -163,6 +165,7 @@ const messageStyleDefault = 'list-group-item-info';
 
 const iconStyle = {};
 iconStyle[analysisConstants.ERROR_LEVEL_NONE] = 'fa-check';
+iconStyle[analysisConstants.ERROR_LEVEL_COMMENT] = 'fa-info-circle';
 iconStyle[analysisConstants.ERROR_LEVEL_WARNING] = 'fa-times';
 iconStyle[analysisConstants.ERROR_LEVEL_ERROR] = 'fa-times';
 iconStyle[analysisConstants.ERROR_LEVEL_SHORT] = 'fa-minus';

@@ -3,9 +3,14 @@
  */
 export const analysisConstants = {
   ERROR_LEVEL_NONE: 0,
-  ERROR_LEVEL_WARNING: 1,
-  ERROR_LEVEL_ERROR: 2,
-  ERROR_LEVEL_SHORT: 3,
+  ERROR_LEVEL_COMMENT: 1,
+  ERROR_LEVEL_WARNING: 2,
+  ERROR_LEVEL_ERROR: 3,
+  ERROR_LEVEL_SHORT: 4,
+
+  TOP_ERROR_SORT_KEY: 60,
+  TOP_WARNING_SORT_KEY: 40,
+  TOP_COMMENT_SORT_KEY: 20,
 
   NUM_FEET: 4,
   NUM_NORMAL_FEET: 3,
@@ -81,31 +86,39 @@ export const annotations = {};
 addAnnotation('too_short', 
   null, 
   analysisConstants.ERROR_LEVEL_SHORT, 
-  10);
+  analysisConstants.TOP_ERROR_SORT_KEY);
 addAnnotation('too_long', 
   null, 
   analysisConstants.ERROR_LEVEL_ERROR, 
-  10);
+  analysisConstants.TOP_ERROR_SORT_KEY - 1);
 addAnnotation('short_rising', 
   analysisConstants.RULE_MAIN, 
   analysisConstants.ERROR_LEVEL_ERROR, 
-  9);
+  analysisConstants.TOP_ERROR_SORT_KEY - 2);
 addAnnotation('long_falling', 
   analysisConstants.RULE_MAIN, 
   analysisConstants.ERROR_LEVEL_ERROR, 
-  8);
+  analysisConstants.TOP_ERROR_SORT_KEY - 3);
 addAnnotation('monosyllable', 
   analysisConstants.RULE_ADDITIONAL_2, 
   analysisConstants.ERROR_LEVEL_ERROR, 
-  7);
+  analysisConstants.TOP_ERROR_SORT_KEY - 4);
 addAnnotation('caesura', 
   analysisConstants.RULE_ADDITIONAL_3, 
   analysisConstants.ERROR_LEVEL_ERROR, 
-  6);
+  analysisConstants.TOP_ERROR_SORT_KEY - 5);
 addAnnotation('long_vowel', 
   analysisConstants.RULE_ADDITIONAL_4, 
   analysisConstants.ERROR_LEVEL_ERROR, 
-  5);
+  analysisConstants.TOP_ERROR_SORT_KEY - 6);
+addAnnotation('ten', 
+  null, 
+  analysisConstants.ERROR_LEVEL_COMMENT, 
+  analysisConstants.TOP_COMMENT_SORT_KEY);
+addAnnotation('nine', 
+  null, 
+  analysisConstants.ERROR_LEVEL_COMMENT, 
+  analysisConstants.TOP_COMMENT_SORT_KEY - 1);
 
 function addAnnotation(id, ruleID, errorLevel, sortKey) {
   annotations[id] = new Annotation(id, ruleID, errorLevel, sortKey);

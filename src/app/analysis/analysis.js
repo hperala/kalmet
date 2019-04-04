@@ -124,7 +124,7 @@ export function createDefaultRules() {
       [new NoLongVowelRule(), new NoMonosyllableRule()]
     ],
 
-    otherConstraints: [new CaesuraRule()]
+    otherConstraints: [new CaesuraRule(), new LengthCommentRule()]
   };
 }
 
@@ -208,6 +208,21 @@ export class CaesuraRule {
 
   error(wordsAndSyllables, result) {
     result.addLineAnnotation(annotations['caesura']);
+  }
+}
+
+export class LengthCommentRule {
+  accept(language, wordsAndSyllables) {
+    this.length = wordsAndSyllables.numSyllables();
+    return this.length !== analysisConstants.MAX_LINE_LENGTH
+      && this.length !== analysisConstants.MAX_LINE_LENGTH - 1;
+  }
+
+  error(wordsAndSyllables, result) {
+    const annotationName = this.length === analysisConstants.MAX_LINE_LENGTH 
+      ? 'ten' 
+      : 'nine';
+    result.addLineAnnotation(annotations[annotationName]);
   }
 }
 

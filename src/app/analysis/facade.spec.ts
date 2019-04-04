@@ -71,4 +71,25 @@ describe('Facade module', () => {
     expect(result.result.getLineAnnotations()[0].id).toBe('caesura');
   });
 
+  it('should mark nine-syllable lines', () => {
+    const result = a.analyze('tuo oli vanha Väinämöinen');
+
+    expect(result.result.getLineErrorLevel()).toBe(analysisConstants.ERROR_LEVEL_COMMENT);
+    expect(result.result.getLineAnnotations()[0].id).toBe('nine');
+  });
+
+  it('should mark ten-syllable lines', () => {
+    const result = a.analyze('tuopa oli vanha Väinämöinen');
+
+    expect(result.result.getLineErrorLevel()).toBe(analysisConstants.ERROR_LEVEL_COMMENT);
+    expect(result.result.getLineAnnotations()[0].id).toBe('ten');
+  });
+
+  it('should not mark eight-syllable lines', () => {
+    const result = a.analyze('oli vanha Väinämöinen');
+
+    expect(result.result.getLineErrorLevel()).toBe(analysisConstants.ERROR_LEVEL_NONE);
+    expect(result.result.getLineAnnotations().length).toBe(0);
+  });
+
 });

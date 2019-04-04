@@ -25,6 +25,13 @@
         </button>
       </div>
       <div class="modal-body" *ngIf="errorPanelVisible">
+        <div *ngIf="line.ok()">
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-success">
+              <span class="fas fa-check" aria-hidden="true"></span> Ei virheitä!
+            </li>
+          </ul>
+        </div>
         <div *ngIf="!line.isEmpty()">
           <ul class="list-group">
             <li 
@@ -40,13 +47,6 @@
                 class="btn btn-primary">
                 {{ line.annotationGroupRuleName(i) }}
               </button>
-            </li>
-          </ul>
-        </div>
-        <div *ngIf="line.ok()">
-          <ul class="list-group">
-            <li class="list-group-item list-group-item-success">
-              <span class="fas fa-check" aria-hidden="true"></span> Ei virheitä!
             </li>
           </ul>
         </div>
